@@ -16,7 +16,7 @@ sed -i 's|set(package_repo "ext-android-bin/raw/master/")|set(package_repo "raw/
 
 # Change app name suffix if TARGET is "Optimised"
 if [ "$TARGET" = "Optimised" ]; then
-    sed -i 's/resValue("string", "app_name_suffixed", "eden")/resValue("string", "app_name_suffixed", "eden optimised")/' src/android/app/build.gradle.kts
+    sed -i 's/resValue("string", "app_name_suffixed", "eden")/resValue("string", "app_name_suffixed", "Eden Optimised")/' src/android/app/build.gradle.kts
 fi
 
 # Count commits and set output APK name
