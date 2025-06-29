@@ -10,10 +10,6 @@ fi
 cd ./eden
 git submodule update --init --recursive
 
-# Workaround for prebuilt ffmpeg download failure
-sed -i 's|set(package_base_url "https://git.eden-emu.dev/eden-emu/")|set(package_base_url "https://github.com/pflyly/eden-nightly/")|' CMakeModules/DownloadExternals.cmake
-sed -i 's|set(package_repo "ext-android-bin/raw/master/")|set(package_repo "raw/refs/heads/main/")|' CMakeModules/DownloadExternals.cmake
-
 # Change app name suffix if TARGET is "Optimised"
 if [ "$TARGET" = "Optimised" ]; then
     sed -i 's/resValue("string", "app_name_suffixed", "eden")/resValue("string", "app_name_suffixed", "Eden Optimised")/' src/android/app/build.gradle.kts
