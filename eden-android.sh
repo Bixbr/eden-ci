@@ -15,6 +15,10 @@ if [ "$TARGET" = "Optimised" ]; then
     sed -i 's/resValue("string", "app_name_suffixed", "eden")/resValue("string", "app_name_suffixed", "Eden Optimised")/' src/android/app/build.gradle.kts
 fi
 
+# Count commits and set output APK name
+COUNT="$(git rev-list --count HEAD)"
+APK_NAME="Eden-${COUNT}-Android-Unofficial-${TARGET}"
+
 cd src/android
 chmod +x ./gradlew
 
