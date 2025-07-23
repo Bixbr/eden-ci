@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # Clone Eden, fallback to mirror if upstream repo fails to clone
-if ! git clone -b 'alpha-copy' 'https://git.eden-emu.dev/eden-emu/eden.git' ./eden; then
+if ! git clone -b 'Optimised-APPNAME' 'https://git.eden-emu.dev/eden-emu/eden.git' ./eden; then
     echo "Using mirror instead..."
     rm -rf ./eden || true
     git clone 'http://git.bixed.xyz/Bix/eden.git' ./eden
@@ -9,11 +9,6 @@ fi
 
 cd ./eden
 git submodule update --init --recursive
-
-# Change app name suffix if TARGET is "Optimised"
-if [ "$TARGET" = "Optimised" ]; then
-    sed -i 's/resValue("string", "app_name_suffixed", "eden")/resValue("string", "app_name_suffixed", "Eden Optimised")/' src/android/app/build.gradle.kts
-fi
 
 # Count commits and set output APK name
 COUNT="$(git rev-list --count HEAD)"
