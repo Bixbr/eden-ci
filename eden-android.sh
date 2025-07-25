@@ -1,10 +1,10 @@
 #!/bin/bash -ex
 
 # Clone Eden, fallback to mirror if upstream repo fails to clone
-if ! git clone 'https://git.eden-emu.dev/eden-emu/eden.git' ./eden; then
+if ! git clone -b "Legacy" 'https://git.eden-emu.dev/eden-emu/eden.git' ./eden; then
     echo "Using mirror instead..."
     rm -rf ./eden || true
-    git clone 'http://git.bixed.xyz/Bix/eden.git' ./eden
+    git clone -b "Legacy" 'http://git.bixed.xyz/Bix/eden.git' ./eden
 fi
 
 cd ./eden
@@ -19,7 +19,7 @@ chmod +x ./gradlew
 
 # Build APK based on target
 if [ "$TARGET" = "Optimised" ]; then
-    ./gradlew assembleGenshinSpoofRelease --console=plain --info -Dorg.gradle.caching=true
+    ./gradlew assembleRelease --console=plain --info -Dorg.gradle.caching=true
 fi
 
 # Find and move the APK to the artifacts folder
