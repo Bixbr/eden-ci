@@ -10,18 +10,16 @@ fi
 cd ./eden
 git submodule update --init --recursive
 
-sed -i 's/resValue("string", "app_name_suffixed", "Eden")/resValue("string", "app_name_suffixed", "Eden Optimised")/' src/android/app/build.gradle.kts
-
 # Count commits and set output APK name
 COUNT="$(git rev-list --count HEAD)"
-APK_NAME="Eden-${COUNT}-Android-Unofficial-${TARGET}"
+APK_NAME="Eden-${COUNT}-Android-official-${TARGET}"
 
 cd src/android
 chmod +x ./gradlew
 
 # Build APK based on target
 if [ "$TARGET" = "Optimised" ]; then
-    ./gradlew assembleGenshinSpoofRelease --console=plain --info -Dorg.gradle.caching=true
+    ./gradlew assembleRelease --console=plain --info -Dorg.gradle.caching=true
 fi
 
 # Find and move the APK to the artifacts folder
