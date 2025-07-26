@@ -1,10 +1,10 @@
 #!/bin/bash -ex
 
 # Clone Eden, fallback to mirror if upstream repo fails to clone
-if ! git clone 'https://git.eden-emu.dev/eden-emu/eden.git' ./eden; then
+if ! git clone -b 'release/0.0.3' 'https://git.eden-emu.dev/eden-emu/eden.git' ./eden; then
     echo "Using mirror instead..."
     rm -rf ./eden || true
-    git clone 'http://git.bixed.xyz/Bix/eden.git' ./eden
+    git clone 'http://,,,' ./eden
 fi
 
 cd ./eden
