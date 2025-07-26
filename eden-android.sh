@@ -10,7 +10,7 @@ fi
 cd ./eden
 git submodule update --init --recursive
 
-sed -i 's/resValue("string", "app_name_suffixed", "eden")/resValue("string", "app_name_suffixed", "Eden Optimised")/' src/android/app/build.gradle.kts
+sed -i 's/resValue("string", "app_name_suffixed", "Eden")/resValue("string", "app_name_suffixed", "Eden Optimised")/' src/android/app/build.gradle.kts
 
 # Count commits and set output APK name
 COUNT="$(git rev-list --count HEAD)"
