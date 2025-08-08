@@ -4,7 +4,7 @@
 if ! git clone -b 'android' 'https://git.bixed.xyz/Bix/yuzu.git' ./yuzu; then
     echo "Using mirror instead..."
     rm -rf ./yuzu || true
-    git clone 'http://,,,' ./eden
+    git clone 'http://,,,' ./yuzu
 fi
 
 cd ./eden
