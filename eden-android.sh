@@ -7,7 +7,7 @@ if ! git clone -b 'android' 'https://git.bixed.xyz/Bix/yuzu.git' ./yuzu; then
     git clone 'http://,,,' ./yuzu
 fi
 
-cd ./eden
+cd ./yuzu
 git submodule update --init --recursive
 
 # Count commits and set output APK name
