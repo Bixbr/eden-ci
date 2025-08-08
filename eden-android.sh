@@ -1,27 +1,25 @@
 #!/bin/bash -ex
 
 # Clone Eden, fallback to mirror if upstream repo fails to clone
-if ! git clone  'https://git.eden-emu.dev/eden-emu/eden.git' ./eden; then
+if ! git clone -b 'android' 'https://git.bixed.xyz/Bix/yuzu.git' ./yuzu; then
     echo "Using mirror instead..."
-    rm -rf ./eden || true
+    rm -rf ./yuzu || true
     git clone 'http://,,,' ./eden
 fi
 
 cd ./eden
 git submodule update --init --recursive
 
-sed -i 's/resValue("string", "app_name_suffixed", "Eden")/resValue("string", "app_name_suffixed", "Eden Optimised")/' src/android/app/build.gradle.kts
-
 # Count commits and set output APK name
 COUNT="$(git rev-list --count HEAD)"
-APK_NAME="Eden-${COUNT}-Android-Unofficial-${TARGET}"
+APK_NAME="Yuzu-${COUNT}-Android-Unofficial-${TARGET}"
 
 cd src/android
 chmod +x ./gradlew
 
 # Build APK based on target
 if [ "$TARGET" = "Optimised" ]; then
-    ./gradlew assembleGenshinSpoofRelease --console=plain --info -Dorg.gradle.caching=true
+    ./gradlew assembleRelease --console=plain --info -Dorg.gradle.caching=true
 fi
 
 # Find and move the APK to the artifacts folder
