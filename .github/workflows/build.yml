@@ -33,17 +33,22 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         
-      - name: Set up Android SDK and NDK 27
+      - name: Install NDK 27 (explicitly)
         uses: android-actions/setup-android@v2
         with:
-          ndk-version: '27.0.11718014'
+          ndk-version: "27.0.11718014"  # Must match exact version
 
-      - name: Override NDK Path
+      - name: Block Yuzu from installing NDK 26
         run: |
-          echo "ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/27.0.11718014" >> $GITHUB_ENV
-          echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.11718014" >> $GITHUB_ENV
-          echo "PATH=$ANDROID_HOME/ndk/27.0.11718014:$PATH" >> $GITHUB_ENV
+          mkdir -p "$HOME/.android"
+          echo "ndk.dir=$ANDROID_HOME/ndk/27.0.11718014" > "$HOME/.android/local.properties"
+          echo "sdk.dir=$ANDROID_HOME" >> "$HOME/.android/local.properties"
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.0.11718014" >> $GITHUB_ENV
 
+      - name: Verify NDK version
+        run: |
+          $ANDROID_NDK_HOME/ndk-build --version
+        
       - name: Compile Eden android
         run: |
           chmod +x ./eden-android.sh
