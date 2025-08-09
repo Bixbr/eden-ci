@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # Clone Eden, fallback to mirror if upstream repo fails to clone
-if ! git clone -b 'android-build' 'https://git.bixed.xyz/Bix/yuzu.git' ./yuzu; then
+if ! git clone -b 'Android-changes' 'https://git.bixed.xyz/Bix/yuzu.git' ./yuzu; then
     echo "Using mirror instead..."
     rm -rf ./yuzu || true
     git clone 'http://,,,' ./yuzu
