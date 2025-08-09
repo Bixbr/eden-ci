@@ -21,6 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt-get update
           sudo apt-get install glslang-tools libvulkan-dev -y
           
       - name: Setup Java
@@ -34,8 +35,15 @@ jobs:
         with:
           cache-read-only: false
         
-      - name: Set up Android SDK
+      - name: Set up Android SDK and NDK 27
         uses: android-actions/setup-android@v2
+        with:
+          ndk-version: '27.0.11718014'  # Explicitly specify NDK 27
+
+      - name: Configure NDK 27 in environment
+        run: |
+          echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/27.0.11718014" >> $GITHUB_ENV
+          echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.11718014" >> $GITHUB_ENV
 
       - name: Compile Eden android
         run: |
@@ -45,6 +53,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4.6.2
         with:
-         name: eden-android-${{ matrix.target }}
-         path: eden/src/android/artifacts/
-          
+          name: eden-android-${{ matrix.target }}
+          path: eden/src/android/artifacts/
