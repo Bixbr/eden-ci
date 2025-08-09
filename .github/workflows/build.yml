@@ -44,10 +44,6 @@ jobs:
           echo "NDK_HOME=$ANDROID_HOME/ndk/27.0.11718014" >> $GITHUB_ENV
           echo "PATH=$ANDROID_HOME/ndk/27.0.11718014:$PATH" >> $GITHUB_ENV
 
-      - name: Patch std::format issue
-        run: |
-          sed -i 's/std::format/fmt::format/g' src/common/scm_rev.cpp
-
       - name: Compile Eden android
         run: |
           chmod +x ./eden-android.sh
